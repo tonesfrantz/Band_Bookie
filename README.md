@@ -5,6 +5,7 @@
 # Available on Heroku:
 
 https://hidden-chamber-28437.herokuapp.com/ | https://git.heroku.com/hidden-chamber-28437.git
+https://git.heroku.com/hidden-chamber-28437.git
 
 # The project:
 
