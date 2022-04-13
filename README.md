@@ -17,3 +17,8 @@ the system outputs singer and band members.
 -- This process takes all the time consuming effort out of booking a band.
 
 # Deliverables of the project:
+
+
+# Planning:
+
+https://github.com/tonesfrantz/Band_Bookie/blob/main/BandBookiewireframing.png
