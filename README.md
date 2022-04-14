@@ -18,7 +18,10 @@ the system outputs singer and band members.
 
 # Deliverables of the project:
 
-
 # Planning:
 
+-- Wireframe of layout:
 https://github.com/tonesfrantz/Band_Bookie/blob/main/BandBookiewireframing.png
+
+--Wireframe of Database:
+/Users/anthonyfrantz/sei/project4/Band_Bookie/dataBaseWireframe.png
