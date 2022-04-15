@@ -4,7 +4,7 @@
 
 # Available on Heroku:
 
-Put Link in here for Heroku.
+Available on Heroku [here](https://dashboard.heroku.com/apps/hidden-chamber-28437/deploy/github)
 
 # The project:
 
