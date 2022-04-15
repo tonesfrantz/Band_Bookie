@@ -4,9 +4,7 @@
  */
 
 module.exports = {
-    "roots": [
-        ".",
-    ],
+    roots: ['.'],
 
     // Automatically clear mock calls and instances between every test
     clearMocks: true,
@@ -15,27 +13,19 @@ module.exports = {
     collectCoverage: true,
 
     // The directory where Jest should output its coverage files
-    coverageDirectory: "coverage",
+    coverageDirectory: 'coverage',
 
-    moduleFileExtensions: [
-        "js",
-        "ts",
-    ],
+    moduleFileExtensions: ['js', 'ts', 'jsx', 'node', 'json', 'tsx'],
 
     // The test environment that will be used for testing
     //testEnvironment: "jsdom",
 
     // The glob patterns Jest uses to detect test files
-    testMatch: [
-        "**/?(*.)+(spec|test).+(ts|tsx|js)"
-    ],
+    testMatch: ['**/?(*.)+(spec|test).+(ts|tsx|js)'],
 
-    "transform": {
-        "^.+\\.(ts|tsx)$": "ts-jest"
+    transform: {
+        '^.+\\.(ts|tsx)$': 'ts-jest',
     },
 
-    testPathIgnorePatterns: [
-        "/node_modules/"
-    ],
-
+    testPathIgnorePatterns: ['/node_modules/'],
 };
