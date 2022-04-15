@@ -4,8 +4,7 @@
 
 # Available on Heroku:
 
-https://hidden-chamber-28437.herokuapp.com/ | https://git.heroku.com/hidden-chamber-28437.git
-https://git.heroku.com/hidden-chamber-28437.git
+Put Link in here for Heroku.
 
 # The project:
 
