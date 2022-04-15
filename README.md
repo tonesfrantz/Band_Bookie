@@ -1,4 +1,6 @@
-# Band_Bookie
+# BandBookie
+
+Project 4
 
 ## Band Booking System for Easy events
 
