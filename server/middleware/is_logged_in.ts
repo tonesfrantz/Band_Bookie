@@ -1,4 +1,4 @@
-const isLoggedIn = (req, res, next) => {
+export const isLoggedIn = (req, res, next) => {
     if (!req.session.id) {
         return res.status(401).json({
             message:
@@ -8,4 +8,4 @@ const isLoggedIn = (req, res, next) => {
     next();
 };
 
-module.exports = isLoggedIn;
+// module.exports = isLoggedIn;
