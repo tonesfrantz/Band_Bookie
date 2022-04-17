@@ -5,7 +5,7 @@ import { ApplicationContext } from '../application-context';
 export function NavBar() {
     const [{ currentUser }, appAction] = useContext(ApplicationContext);
     return (
-        <nav>
+        <nav className='navbar'>
             <ul>
                 <li>
                     <Link to='/'>Home</Link>
@@ -24,9 +24,14 @@ export function NavBar() {
                     </div>
                 )}
                 {currentUser && (
-                    <li>
-                        <Link to='/logout'>Logout</Link>
-                    </li>
+                    <div>
+                        <li>
+                            <Link to='/logout'>Logout</Link>
+                        </li>
+                        <li>
+                            <Link to='/admin'>Admin</Link>
+                        </li>
+                    </div>
                 )}
             </ul>
         </nav>

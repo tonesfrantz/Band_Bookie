@@ -3,6 +3,14 @@ export {};
 import { db } from '../database/db';
 
 export const Users = {
+    // This could be a security issue. (? Check w Alex and Will)
+    getAll: () => {
+        const query = 'SELECT * FROM users';
+        return db.query(query).then((response: any) => {
+            return response.rows;
+        });
+    },
+
     getById: (id: number) => {
         const query = 'SELECT * FROM users WHERE id = $1';
         return db.query(query, [id]).then((response: any) => {

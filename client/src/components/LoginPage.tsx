@@ -14,10 +14,12 @@ export function LoginPage() {
     const [appState, appAction] = useContext(ApplicationContext);
     const navigate = useNavigate();
     const [loginFormData, setLoginFormData] = useState<any>({
-        username: '',
-        password: '',
-        password_confirmation: '',
+        username: null,
+        password: null,
+        password_confirmation: null,
     });
+    //Trying to have a front end Error Handlerto change color of button.
+    const [errorHandler, setErrorhandle] = useState<any>({ color: 'error' });
 
     useEffect(() => {
         if (appState.currentUser !== null) {
@@ -44,6 +46,19 @@ export function LoginPage() {
     const setFieldValue = (field: string, value: any) => {
         setLoginFormData({ ...loginFormData, [field]: value });
     };
+
+    //
+    useEffect(() => {
+        if (
+            loginFormData.username !== null && // Try to FIX the login button and making sure fileds are all filled in.
+            loginFormData.password !== null
+        ) {
+            // let color: string = 'success';
+            setErrorhandle({ color: 'success' });
+        }
+    }, [errorHandler]);
+
+    console.log(errorHandler);
     // console.log(loginFormData);
     // console.log(appState);
     return (
@@ -76,7 +91,13 @@ export function LoginPage() {
                 }
                 label='Password_Confirmation'
             />
-            <Button onClick={login}>Login</Button>
+
+            <Button
+                onClick={login}
+                color={errorHandler.color}
+                variant='contained'>
+                Login
+            </Button>
         </>
     );
 }

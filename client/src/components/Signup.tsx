@@ -81,7 +81,9 @@ export function Signup() {
                 }
                 label='Password_Confirmation'
             />
-            <Button onClick={signup}>Sign-up</Button>
+            <Button onClick={signup} color='success'>
+                Sign-up
+            </Button>
         </>
     );
 }

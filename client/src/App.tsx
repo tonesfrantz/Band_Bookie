@@ -15,6 +15,7 @@ import {
 import { NavBar } from './components/NavBar';
 import { LogoutPage } from './components/LogoutPage';
 import { Signup } from './components/Signup';
+import { AdminPage } from './components/AdminPage';
 
 function App() {
     const [appState, appAction] = useReducer(
@@ -40,6 +41,7 @@ function App() {
 
     return (
         <div className='App'>
+            <h1>Band Bookie</h1>
             <ApplicationContext.Provider value={[appState, appAction]}>
                 <BrowserRouter>
                     <NavBar />
@@ -49,6 +51,7 @@ function App() {
                         <Route path='login' element={<LoginPage />} />
                         <Route path='signup' element={<Signup />} />
                         <Route path='logout' element={<LogoutPage />} />
+                        <Route path='admin' element={<AdminPage />} />
                         <Route
                             path='*'
                             element={<p>Page not found! Oh NO!</p>}
