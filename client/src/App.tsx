@@ -14,6 +14,7 @@ import {
 } from './application-context';
 import { NavBar } from './components/NavBar';
 import { LogoutPage } from './components/LogoutPage';
+import { Signup } from './components/Signup';
 
 function App() {
     const [appState, appAction] = useReducer(
@@ -46,6 +47,7 @@ function App() {
                         <Route path='/' element={<HomePage />} />
                         <Route path='events' element={<Events />} />
                         <Route path='login' element={<LoginPage />} />
+                        <Route path='signup' element={<Signup />} />
                         <Route path='logout' element={<LogoutPage />} />
                         <Route
                             path='*'

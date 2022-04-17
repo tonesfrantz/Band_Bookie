@@ -1,10 +1,11 @@
 import express from 'express';
 import { Users } from '../../models/user';
 import bcrypt from 'bcrypt';
+import errorHandler from '../../middleware/error_handler';
 
 const router = express.Router();
 
-router.post('/', (req: any, res: any, next: any) => {
+router.post('/', errorHandler, (req: any, res: any, next: any) => {
     const user = req.body;
     // Note that the asynchronous version is preferred but we use Sync here for ease
 

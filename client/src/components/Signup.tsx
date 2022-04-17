@@ -10,53 +10,58 @@ import {
     DefaultApplicationState,
 } from './../application-context';
 
-export function LoginPage() {
+export function Signup() {
     const [appState, appAction] = useContext(ApplicationContext);
     const navigate = useNavigate();
-    const [loginFormData, setLoginFormData] = useState<any>({
+    const [signUpData, setSignUpData] = useState<any>({
         username: '',
         password: '',
         password_confirmation: '',
     });
 
     useEffect(() => {
-        if (appState.currentUser !== null) {
+        if (appState.currentUser) {
             navigate('/');
+        } else {
         }
     }, [appState.currentUser]);
 
-    const login = () => {
-        axios
-            .post('/api/sessions', {
-                username: loginFormData.username,
-                password: loginFormData.password,
-            })
-            .then((response: any) => response.data)
-            .then((data: any) => {
-                appAction({
-                    type: ActionType.LOGIN,
-                    payload: {
-                        user: data,
-                    },
+    const signup = () => {
+        if (signUpData.password === signUpData.password_confirmation) {
+            axios
+                .post('/api/users', {
+                    username: signUpData.username,
+                    password: signUpData.password,
+                })
+                .then((response: any) => response.data)
+                .then((data: any) => {
+                    appAction({
+                        type: ActionType.LOGIN,
+                        payload: {
+                            user: data,
+                        },
+                    });
                 });
-            });
+        } else {
+            alert('Passwords do not match');
+        }
     };
     const setFieldValue = (field: string, value: any) => {
-        setLoginFormData({ ...loginFormData, [field]: value });
+        setSignUpData({ ...signUpData, [field]: value });
     };
     // console.log(loginFormData);
     // console.log(appState);
     return (
         <>
-            <h3>Login Page</h3>
+            <h3>Signup age</h3>
             <TextField
-                helperText='Please enter your name'
+                helperText='Please enter your username'
                 id='loginform-name'
                 label='Username'
                 onChange={(event: any) =>
                     setFieldValue('username', event.target.value)
                 }
-                value={loginFormData.username}
+                value={signUpData.username}
             />
             <TextField
                 type='password'
@@ -76,7 +81,7 @@ export function LoginPage() {
                 }
                 label='Password_Confirmation'
             />
-            <Button onClick={login}>Login</Button>
+            <Button onClick={signup}>Sign-up</Button>
         </>
     );
 }

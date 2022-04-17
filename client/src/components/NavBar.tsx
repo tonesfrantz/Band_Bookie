@@ -14,9 +14,14 @@ export function NavBar() {
                     <Link to='/events'>Events</Link>
                 </li>
                 {currentUser == null && (
-                    <li>
-                        <Link to='/login'>Login</Link>
-                    </li>
+                    <div>
+                        <li>
+                            <Link to='/login'>Login</Link>
+                        </li>
+                        <li>
+                            <Link to='/signup'>SignUp</Link>
+                        </li>
+                    </div>
                 )}
                 {currentUser && (
                     <li>

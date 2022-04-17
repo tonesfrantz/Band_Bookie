@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import axios from 'axios';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -8,24 +7,28 @@ export function LogoutPage() {
     const [appState, appAction] = useContext(ApplicationContext);
     const navigate = useNavigate();
     useEffect(() => {
-        if (!appState.currentUser) {
+        const logout = () => {
+            axios
+                .delete('/api/sessions', {})
+                .then((response: any) => response.data)
+                .then((data: any) => {
+                    appAction({
+                        type: ActionType.LOGOUT,
+                    });
+                });
+        };
+
+        logout();
+    }, []);
+    useEffect(() => {
+        if (appState.currentUser === null) {
             navigate('/');
         }
     }, [appState.currentUser]);
 
-    const logout = () => {
-        axios
-            .delete('/api/sessions', {})
-            .then((response: any) => response.data)
-            .then((data: any) => {
-                appAction({
-                    type: ActionType.LOGOUT,
-                });
-            });
-    };
     return (
         <div>
-            <Button onClick={logout}>Logout</Button>
+            <p>Logging Out</p>
         </div>
     );
 }

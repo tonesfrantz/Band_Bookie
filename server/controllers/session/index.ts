@@ -1,12 +1,13 @@
 import express from 'express';
 import { Users } from '../../models/user';
 import bcrypt from 'bcrypt';
+import errorHandler from '../../middleware/error_handler';
 
 const router = express.Router();
 
 // Routes
 // 1. Create Session (login)
-router.post('/', (req: any, res: any) => {
+router.post('/', errorHandler, (req: any, res: any) => {
     const username = req.body.username;
     const password = req.body.password;
     Users.getByUsername(username).then((userNameResponse: any) => {

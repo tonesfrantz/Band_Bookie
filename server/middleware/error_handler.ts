@@ -1,4 +1,4 @@
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err: any, req: any, res: any, next: any) => {
     let status = err.status || 500;
     let message = err.message || 'Something went wrong.';
 
@@ -7,4 +7,4 @@ const errorHandler = (err, req, res, next) => {
     next(err); //Prevent any other default error handler from taking over
 };
 
-module.exports = errorHandler;
+export default errorHandler;
