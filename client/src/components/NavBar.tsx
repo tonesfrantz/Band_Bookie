@@ -33,6 +33,9 @@ export function NavBar() {
                         </li>
                     </div>
                 )}
+                {/* {currentUser?.is_admin && ( */}
+
+                {/* )} */}
             </ul>
         </nav>
     );

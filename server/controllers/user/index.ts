@@ -35,6 +35,8 @@ router.post('/', errorHandler, (req: any, res: any, next: any) => {
             next(error);
         });
 });
+
+// Check if user is admin... Front end error hadler
 router.get('/', (req: any, res: any) => {
     Users.getAll().then((response: any) => {
         res.json(response);

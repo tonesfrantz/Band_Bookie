@@ -10,17 +10,22 @@ import {
     DefaultApplicationState,
 } from './../application-context';
 
+let defaultErrors = {
+    error_username: false,
+    error_password: false,
+    error_confirm_password: false,
+};
+
 export function LoginPage() {
     const [appState, appAction] = useContext(ApplicationContext);
     const navigate = useNavigate();
     const [loginFormData, setLoginFormData] = useState<any>({
-        username: null,
-        password: null,
-        password_confirmation: null,
+        username: '',
+        password: '',
+        password_confirmation: '',
     });
     //Trying to have a front end Error Handlerto change color of button.
-    const [errorHandler, setErrorhandle] = useState<any>({ color: 'error' });
-
+    const [errorHandler, setErrorhandle] = useState<any>(defaultErrors);
     useEffect(() => {
         if (appState.currentUser !== null) {
             navigate('/');
@@ -28,44 +33,67 @@ export function LoginPage() {
     }, [appState.currentUser]);
 
     const login = () => {
-        axios
-            .post('/api/sessions', {
-                username: loginFormData.username,
-                password: loginFormData.password,
-            })
-            .then((response: any) => response.data)
-            .then((data: any) => {
-                appAction({
-                    type: ActionType.LOGIN,
-                    payload: {
-                        user: data,
-                    },
+        let hasError = false;
+        let loginErrors = defaultErrors;
+        if (loginFormData.username === '') {
+            hasError = true;
+            loginErrors.error_username = true;
+        }
+        if (loginFormData.password === '') {
+            hasError = true;
+            loginErrors.error_password = true;
+        }
+
+        if (loginFormData.password_confirmation !== loginFormData.password) {
+            hasError = true;
+            loginErrors.error_confirm_password = true;
+        }
+
+        if (!hasError) {
+            axios
+                .post('/api/sessions', {
+                    username: loginFormData.username,
+                    password: loginFormData.password,
+                })
+                .then((response: any) => response.data)
+                .then((data: any) => {
+                    appAction({
+                        type: ActionType.LOGIN,
+                        payload: {
+                            user: data,
+                        },
+                    });
                 });
-            });
+        } else {
+            setErrorhandle(loginErrors);
+        }
     };
     const setFieldValue = (field: string, value: any) => {
         setLoginFormData({ ...loginFormData, [field]: value });
     };
 
     //
-    useEffect(() => {
-        if (
-            loginFormData.username !== null && // Try to FIX the login button and making sure fileds are all filled in.
-            loginFormData.password !== null
-        ) {
-            // let color: string = 'success';
-            setErrorhandle({ color: 'success' });
-        }
-    }, [errorHandler]);
 
-    console.log(errorHandler);
+    // useEffect(() => {
+
+    // }, [
+    //     loginFormData.username,
+    //     loginFormData.password,
+    //     loginFormData.password_confirmation,
+    // ]);
+
+    // console.log(errorHandler);
     // console.log(loginFormData);
-    // console.log(appState);
+
+    console.log(appState);
+
     return (
         <>
             <h3>Login Page</h3>
+            {/* put helpertext in state for error handler. */}
             <TextField
                 helperText='Please enter your name'
+                error={errorHandler.error_username} // The errorHandler State will make this false... The useEffect will tell you if it's false bn
                 id='loginform-name'
                 label='Username'
                 onChange={(event: any) =>
@@ -76,6 +104,7 @@ export function LoginPage() {
             <TextField
                 type='password'
                 helperText='Please enter password'
+                error={errorHandler.error_password}
                 id='loginform-password'
                 onChange={(event: any) =>
                     setFieldValue('password', event.target.value)
@@ -85,6 +114,7 @@ export function LoginPage() {
             <TextField
                 type='password'
                 helperText='Please re-enter your password'
+                error={errorHandler.error_confirm_password}
                 id='loginform-password_confirmation'
                 onChange={(event: any) =>
                     setFieldValue('password_confirmation', event.target.value)
@@ -92,10 +122,7 @@ export function LoginPage() {
                 label='Password_Confirmation'
             />
 
-            <Button
-                onClick={login}
-                color={errorHandler.color}
-                variant='contained'>
+            <Button onClick={login} color='success' variant='contained'>
                 Login
             </Button>
         </>

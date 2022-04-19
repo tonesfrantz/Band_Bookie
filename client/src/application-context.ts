@@ -4,6 +4,7 @@ import React, { Reducer } from 'react';
 export interface User {
     id: number;
     username: string;
+    is_admin: boolean;
 }
 
 export enum ActionType {

@@ -4,8 +4,9 @@ import { db } from '../database/db';
 
 export const Users = {
     // This could be a security issue. (? Check w Alex and Will)
+    // CHange to not return Password
     getAll: () => {
-        const query = 'SELECT * FROM users';
+        const query = 'SELECT id, username, is_admin FROM users';
         return db.query(query).then((response: any) => {
             return response.rows;
         });
