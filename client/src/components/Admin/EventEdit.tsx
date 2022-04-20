@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -43,32 +43,34 @@ export function EventEdit() {
     return (
         <>
             <h3>
-                Event No.{event.id}; {event.name}.
+                Event No.{event.id} {event.name}.
             </h3>
             <form>
-                <TextField
-                    helperText='Please edit name here'
-                    id='event-edit-name'
-                    onChange={(event: any) =>
-                        setFieldValue('name', event.target.value)
-                    }
-                    value={event.name}
-                />
-                <TextField
-                    helperText='Please edit date here'
-                    id='event-edit-date'
-                    onChange={(event: any) =>
-                        setFieldValue('name', event.target.value)
-                    }
-                    value={event.date}
-                />
+                <Box sx={{ minWidth: 120 }}>
+                    <TextField
+                        helperText='Please edit name here'
+                        id='event-edit-name'
+                        onChange={(event: any) =>
+                            setFieldValue('name', event.target.value)
+                        }
+                        value={event.name}
+                    />
+                    <TextField
+                        helperText='Please edit date here'
+                        id='event-edit-date'
+                        onChange={(event: any) =>
+                            setFieldValue('name', event.target.value)
+                        }
+                        value={event.date}
+                    />
 
-                <Button
-                    onClick={submitEditEvent}
-                    color='success'
-                    variant='contained'>
-                    Update
-                </Button>
+                    <Button
+                        onClick={submitEditEvent}
+                        color='success'
+                        variant='contained'>
+                        Update
+                    </Button>
+                </Box>
             </form>
         </>
     );

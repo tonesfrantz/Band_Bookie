@@ -53,7 +53,7 @@ export function Signup() {
     // console.log(appState);
     return (
         <>
-            <h3>Signup age</h3>
+            <h3>Signu page</h3>
             <TextField
                 helperText='Please enter your username'
                 id='loginform-name'

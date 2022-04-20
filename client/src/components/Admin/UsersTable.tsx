@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { ApplicationContext } from '../../application-context';
 import axios from 'axios';
@@ -50,70 +50,74 @@ export function UsersTable() {
         <>
             <h1>Users</h1>
             <div>
-                <Button>
-                    <Link to='/admin/'>Back to Admin</Link>
-                </Button>
-                <Button>
-                    <Link to='/admin/events'>Back to Events</Link>
-                </Button>
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 700 }} aria-label='customized table'>
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell>ID</StyledTableCell>
-                                <StyledTableCell align='right'>
-                                    Username
-                                </StyledTableCell>
-                                <StyledTableCell align='right'>
-                                    Is Admin
-                                </StyledTableCell>
-                                <StyledTableCell align='right'>
-                                    Edit
-                                </StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {userData &&
-                                userData.map((e: any) => (
-                                    <StyledTableRow key={e.id}>
-                                        <StyledTableCell
-                                            component='th'
-                                            scope='row'>
-                                            {e.id}
-                                        </StyledTableCell>
-                                        <StyledTableCell align='right'>
-                                            {e.username}
-                                        </StyledTableCell>
-                                        <StyledTableCell align='right'>
-                                            {e.is_admin ? (
-                                                <Icon
-                                                    sx={{
-                                                        color: 'green',
-                                                    }}>
-                                                    done
-                                                </Icon>
-                                            ) : (
-                                                <Icon
-                                                    sx={{
-                                                        color: 'red',
-                                                    }}>
-                                                    clear
-                                                </Icon>
-                                            )}
-                                        </StyledTableCell>
-                                        <StyledTableCell align='right'>
-                                            <Button>
-                                                <Link
-                                                    to={`/admin/user/${e.id}`}>
-                                                    Edit User
-                                                </Link>
-                                            </Button>
-                                        </StyledTableCell>
-                                    </StyledTableRow>
-                                ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                <Box sx={{ minWidth: 120 }}>
+                    <Button>
+                        <Link to='/admin/'>Back to Admin</Link>
+                    </Button>
+                    <Button>
+                        <Link to='/admin/events'>Back to Events</Link>
+                    </Button>
+                    <TableContainer component={Paper}>
+                        <Table
+                            sx={{ minWidth: 500 }}
+                            aria-label='customized table'>
+                            <TableHead>
+                                <TableRow>
+                                    <StyledTableCell>ID</StyledTableCell>
+                                    <StyledTableCell align='right'>
+                                        Username
+                                    </StyledTableCell>
+                                    <StyledTableCell align='right'>
+                                        Is Admin
+                                    </StyledTableCell>
+                                    <StyledTableCell align='right'>
+                                        Edit
+                                    </StyledTableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {userData &&
+                                    userData.map((e: any) => (
+                                        <StyledTableRow key={e.id}>
+                                            <StyledTableCell
+                                                component='th'
+                                                scope='row'>
+                                                {e.id}
+                                            </StyledTableCell>
+                                            <StyledTableCell align='right'>
+                                                {e.username}
+                                            </StyledTableCell>
+                                            <StyledTableCell align='right'>
+                                                {e.is_admin ? (
+                                                    <Icon
+                                                        sx={{
+                                                            color: 'green',
+                                                        }}>
+                                                        done
+                                                    </Icon>
+                                                ) : (
+                                                    <Icon
+                                                        sx={{
+                                                            color: 'red',
+                                                        }}>
+                                                        clear
+                                                    </Icon>
+                                                )}
+                                            </StyledTableCell>
+                                            <StyledTableCell align='right'>
+                                                <Button>
+                                                    <Link
+                                                        to={`/admin/user/${e.id}`}>
+                                                        Edit User
+                                                    </Link>
+                                                </Button>
+                                            </StyledTableCell>
+                                        </StyledTableRow>
+                                    ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Box>
             </div>
         </>
     );
