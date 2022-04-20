@@ -13,6 +13,9 @@ export function NavBar() {
                 <li>
                     <Link to='/events'>Events</Link>
                 </li>
+                <li>
+                    <Link to='/addevent'>Create Event</Link>
+                </li>
                 {currentUser == null && (
                     <div>
                         <li>
@@ -24,18 +27,19 @@ export function NavBar() {
                     </div>
                 )}
                 {currentUser && (
-                    <div>
+                    <>
                         <li>
                             <Link to='/logout'>Logout</Link>
                         </li>
+                    </>
+                )}
+                {currentUser?.is_admin && (
+                    <>
                         <li>
                             <Link to='/admin'>Admin</Link>
                         </li>
-                    </div>
+                    </>
                 )}
-                {/* {currentUser?.is_admin && ( */}
-
-                {/* )} */}
             </ul>
         </nav>
     );

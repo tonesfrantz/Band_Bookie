@@ -16,9 +16,11 @@ import { NavBar } from './components/NavBar';
 import { LogoutPage } from './components/LogoutPage';
 import { Signup } from './components/Signup';
 import { AdminPage } from './components/Admin/AdminPage';
-import { UserTable } from './components/Admin/UserTable';
+import { UsersTable } from './components/Admin/UsersTable';
 import { EventsTable } from './components/Admin/EventsTable';
-import { EventsEdit } from './components/Admin/EventsEdit';
+import { EventEdit } from './components/Admin/EventEdit';
+import { AddEvent } from './components/Customer/AddEvent';
+import { UserEdit } from './components/Admin/UserEdit';
 
 function App() {
     const [appState, appAction] = useReducer(
@@ -49,23 +51,18 @@ function App() {
                 <BrowserRouter>
                     <NavBar />
                     <Routes>
-                        <Route path='/' element={<HomePage />} />
-                        <Route path='events' element={<Events />} />
-                        <Route path='login' element={<LoginPage />} />
-                        <Route path='signup' element={<Signup />} />
-                        <Route path='logout' element={<LogoutPage />} />
                         <Route path='admin' element={<AdminPage />} />
-                        <Route path='admin/users' element={<UserTable />} />
+                        <Route path='admin/event/:id' element={<EventEdit />} />
                         <Route path='admin/events' element={<EventsTable />} />
-                        <Route
-                            path='admin/event/:id'
-                            element={<EventsEdit />}
-                        />
-                        <Route
-                            path='admin/events/id'
-                            element={<EventsTable />}
-                        />{' '}
-                        //How do you enter a number here?
+                        <Route path='admin/users' element={<UsersTable />} />
+                        <Route path='admin/user/:id' element={<UserEdit />} />
+                        <Route path='addevent' element={<AddEvent />} />
+                        <Route path='events' element={<Events />} />
+                        <Route path='/' element={<HomePage />} />
+                        <Route path='login' element={<LoginPage />} />
+                        <Route path='logout' element={<LogoutPage />} />
+                        <Route path='signup' element={<Signup />} />
+
                         <Route
                             path='*'
                             element={<p>Page not found! Oh NO!</p>}

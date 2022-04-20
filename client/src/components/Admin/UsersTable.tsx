@@ -1,8 +1,11 @@
 import { Button } from '@mui/material';
+import { useContext, useEffect, useState } from 'react';
+import { ApplicationContext } from '../../application-context';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
+import Icon from '@mui/material/Icon';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -30,27 +33,28 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-export function EventsTable() {
-    const [events, setEvents] = useState<any>([]);
+export function UsersTable() {
+    const [appState, appAction] = useContext(ApplicationContext);
+    const [userData, setUserData] = useState<any>([]);
+
     useEffect(() => {
         axios
-            .get('/api/events')
+            .get('/api/users')
             .then((response: any) => response.data)
             .then((data: any) => {
-                setEvents(data);
+                setUserData(data);
             });
     }, []);
-    console.log(events);
 
     return (
         <>
-            <h1>Events</h1>
+            <h1>Users</h1>
             <div>
                 <Button>
                     <Link to='/admin/'>Back to Admin</Link>
                 </Button>
                 <Button>
-                    <Link to='/admin/users'>Back to Users</Link>
+                    <Link to='/admin/events'>Back to Events</Link>
                 </Button>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 700 }} aria-label='customized table'>
@@ -58,10 +62,10 @@ export function EventsTable() {
                             <TableRow>
                                 <StyledTableCell>ID</StyledTableCell>
                                 <StyledTableCell align='right'>
-                                    Name
+                                    Username
                                 </StyledTableCell>
                                 <StyledTableCell align='right'>
-                                    Date
+                                    Is Admin
                                 </StyledTableCell>
                                 <StyledTableCell align='right'>
                                     Edit
@@ -69,8 +73,8 @@ export function EventsTable() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {events &&
-                                events.map((e: any) => (
+                            {userData &&
+                                userData.map((e: any) => (
                                     <StyledTableRow key={e.id}>
                                         <StyledTableCell
                                             component='th'
@@ -78,16 +82,30 @@ export function EventsTable() {
                                             {e.id}
                                         </StyledTableCell>
                                         <StyledTableCell align='right'>
-                                            {e.name}
+                                            {e.username}
                                         </StyledTableCell>
                                         <StyledTableCell align='right'>
-                                            {e.date}
+                                            {e.is_admin ? (
+                                                <Icon
+                                                    sx={{
+                                                        color: 'green',
+                                                    }}>
+                                                    done
+                                                </Icon>
+                                            ) : (
+                                                <Icon
+                                                    sx={{
+                                                        color: 'red',
+                                                    }}>
+                                                    clear
+                                                </Icon>
+                                            )}
                                         </StyledTableCell>
                                         <StyledTableCell align='right'>
                                             <Button>
                                                 <Link
-                                                    to={`/admin/event/${e.id}`}>
-                                                    Edit Event
+                                                    to={`/admin/user/${e.id}`}>
+                                                    Edit User
                                                 </Link>
                                             </Button>
                                         </StyledTableCell>

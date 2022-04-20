@@ -21,7 +21,8 @@ router.post('/', errorHandler, (req: any, res: any) => {
             req.session.username = username;
             res.status(200).json({
                 id: userNameResponse.id,
-                username: username,
+                username: userNameResponse.username,
+                is_admin: userNameResponse.is_admin,
             });
         } else {
             res.status(400).json({

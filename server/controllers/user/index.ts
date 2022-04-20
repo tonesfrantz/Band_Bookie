@@ -2,6 +2,7 @@ import express from 'express';
 import { Users } from '../../models/user';
 import bcrypt from 'bcrypt';
 import errorHandler from '../../middleware/error_handler';
+import { isLoggedIn } from '../../middleware/is_logged_in';
 
 const router = express.Router();
 
@@ -35,10 +36,22 @@ router.post('/', errorHandler, (req: any, res: any, next: any) => {
             next(error);
         });
 });
+// UPdate/PATCH
+router.patch('/:id([0-9]+)', isLoggedIn, (req: any, res: any) => {
+    const { id, username, is_admin } = req.body;
+    Users.update(id, username, is_admin).then((response: any) => {
+        res.json({ message: 'Item updated' });
+    });
+});
 
 // Check if user is admin... Front end error hadler
 router.get('/', (req: any, res: any) => {
     Users.getAll().then((response: any) => {
+        res.json(response);
+    });
+});
+router.get('/:id([0-9]+)', (req: any, res: any) => {
+    Users.getById(req.params.id).then((response: any) => {
         res.json(response);
     });
 });

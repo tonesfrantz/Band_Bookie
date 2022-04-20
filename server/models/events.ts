@@ -4,7 +4,7 @@ import { db } from '../database/db';
 
 export const Events = {
     getAll: () => {
-        const query = 'SELECT * FROM events';
+        const query = 'SELECT * FROM events ORDER BY id';
         return db.query(query).then((response: any) => {
             return response.rows;
         });

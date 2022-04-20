@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-export function EventsEdit() {
+export function EventEdit() {
     const { id } = useParams();
     const [event, setEvent] = useState<any>([]);
     const navigate = useNavigate();
@@ -35,11 +35,10 @@ export function EventsEdit() {
                 name: event.name,
                 date: event.date,
             })
-            .then((response: any) => response.data)
-            .then((data: any) => {
-                setEvent(data);
+            .then(() => navigate('/admin/events'))
+            .catch(() => {
+                alert('Something went wrong. Not Updated!');
             });
-        navigate('/admin/events');
     };
     return (
         <>
