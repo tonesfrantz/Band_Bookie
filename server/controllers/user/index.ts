@@ -55,4 +55,9 @@ router.get('/:id([0-9]+)', (req: any, res: any) => {
         res.json(response);
     });
 });
+router.delete('/:id([0-9]+)', (req: any, res: any) => {
+    Users.delete(req.params.id).then((response: any) => {
+        res.json(response);
+    });
+});
 export default router;

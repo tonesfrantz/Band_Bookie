@@ -31,17 +31,25 @@ export function UserEdit() {
                 username: user.username,
                 is_admin: user.is_admin,
             })
-            .then(() => navigate('/admin/users'));
-        // .then((data: any) => {
-        //     setUser(data);
-        // });
+            .then(() => navigate('/admin/users'))
+            .catch(() => {
+                alert('Something went wrong. Not Updated');
+            });
+    };
+    const submitDeleteUser = () => {
+        axios
+            .delete(`/api/users/${id}`)
+            .then(() => navigate('/admin/users'))
+            .catch(() => {
+                alert('Something went wrong. Not Deleted');
+            });
     };
     return (
         <>
             <h3>
                 User No.{user.id} {user.username}.
             </h3>
-            <form>
+            <form className='adminPage'>
                 <Box sx={{ minWidth: 120 }}>
                     <TextField
                         helperText='Please edit username here'
@@ -72,6 +80,12 @@ export function UserEdit() {
                         color='success'
                         variant='contained'>
                         Update
+                    </Button>
+                    <Button
+                        onClick={submitDeleteUser}
+                        color='success'
+                        variant='contained'>
+                        Delete
                     </Button>
                 </Box>
             </form>

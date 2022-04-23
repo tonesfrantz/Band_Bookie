@@ -18,6 +18,7 @@ const pgSession = require('connect-pg-simple')(expressSession);
 import eventController from './controllers/event/index';
 import sessionsController from './controllers/session/index';
 import usersController from './controllers/user/index';
+import singerController from './controllers/singer/index';
 // const contactController = require('./controllers/contact');
 // const errorHandler = require('./middleware/error_handler');
 // const logger = require('./middleware/logger');
@@ -60,6 +61,7 @@ app.use(express.json()); // support json encoded bodies
 app.use('/api/events', eventController);
 app.use('/api/sessions', sessionsController);
 app.use('/api/users', usersController);
+app.use('/api/singers', singerController);
 // app.use('/api/contact', contactController);
 
 // Post-request middleware

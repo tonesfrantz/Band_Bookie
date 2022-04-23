@@ -10,6 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import moment from 'moment';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -44,8 +45,13 @@ export function EventsTable() {
 
     return (
         <>
-            <h1>Events</h1>
-            <div>
+            <h1>
+                Events{' '}
+                <Button color='success' variant='contained' href='/addevent'>
+                    Add Event
+                </Button>
+            </h1>
+            <div className='adminPage'>
                 <Box sx={{ minWidth: 120 }}>
                     <Button>
                         <Link to='/admin/'>Back to Admin</Link>
@@ -53,15 +59,24 @@ export function EventsTable() {
                     <Button>
                         <Link to='/admin/users'>Back to Users</Link>
                     </Button>
+                    <Button>
+                        <Link to='/admin/singers'>Back to Singers</Link>
+                    </Button>
                     <TableContainer component={Paper}>
                         <Table
                             sx={{ minWidth: 500 }}
                             aria-label='customized table'>
                             <TableHead>
                                 <TableRow>
-                                    <StyledTableCell>ID</StyledTableCell>
+                                    <StyledTableCell>Event ID</StyledTableCell>
                                     <StyledTableCell align='right'>
-                                        Name
+                                        Event Name
+                                    </StyledTableCell>
+                                    <StyledTableCell align='right'>
+                                        Singer ID
+                                    </StyledTableCell>
+                                    <StyledTableCell align='right'>
+                                        Singer Name
                                     </StyledTableCell>
                                     <StyledTableCell align='right'>
                                         Date
@@ -84,7 +99,15 @@ export function EventsTable() {
                                                 {e.name}
                                             </StyledTableCell>
                                             <StyledTableCell align='right'>
-                                                {e.date}
+                                                {e.singer_id}
+                                            </StyledTableCell>
+                                            <StyledTableCell align='right'>
+                                                {e.singer_name}
+                                            </StyledTableCell>
+                                            <StyledTableCell align='right'>
+                                                {moment(e.date).format(
+                                                    'dddd Do, MMMM, yyyy'
+                                                )}
                                             </StyledTableCell>
                                             <StyledTableCell align='right'>
                                                 <Button>

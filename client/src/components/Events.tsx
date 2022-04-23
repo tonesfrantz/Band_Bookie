@@ -10,6 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import moment from 'moment';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -32,6 +33,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export function Events() {
     const [events, setEvents] = useState<any>([]);
+
     useEffect(() => {
         axios
             .get('/api/events')
@@ -40,11 +42,18 @@ export function Events() {
                 setEvents(data);
             });
     }, []);
-    console.log(events);
-
+    // console.log(events);
     return (
         <>
-            <h1>Events</h1>
+            <h1>
+                Upcoming Events:
+                <Button
+                    color='success'
+                    variant='contained'
+                    href='/admin/events'>
+                    Edit
+                </Button>
+            </h1>
             <div>
                 <TableContainer
                     sx={{ padding: 10, width: '80%' }}
@@ -68,7 +77,9 @@ export function Events() {
                                             {e.name}
                                         </StyledTableCell>
                                         <StyledTableCell align='right'>
-                                            {e.date}
+                                            {moment(e.date).format(
+                                                'dddd Do, MMMM, yyyy'
+                                            )}
                                         </StyledTableCell>
                                     </StyledTableRow>
                                 ))}

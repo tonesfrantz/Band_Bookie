@@ -2,43 +2,49 @@ export {};
 
 import { db } from '../database/db';
 
-export const Users = {
+export const Singers = {
     // This could be a security issue. (? Check w Alex and Will)
     // CHange to not return Password
-    getAll: () => {
-        const query = 'SELECT id, username, is_admin FROM users ORDER BY id';
+    get: () => {
+        const query =
+            'SELECT id, fullname, profile_photo, instrument FROM singers ORDER BY id';
         return db.query(query).then((response: any) => {
             return response.rows;
         });
     },
 
     getById: (id: number) => {
-        const query = 'SELECT * FROM users WHERE id = $1';
+        const query = 'SELECT * FROM singers WHERE id = $1';
         return db.query(query, [id]).then((response: any) => {
             return response.rows && response.rows.length > 0
                 ? response.rows[0]
                 : null;
         });
     },
-    getByUsername: (username: string) => {
-        const query = 'SELECT * FROM users WHERE username = $1';
-        return db.query(query, [username]).then((response) => {
+    getByFullname: (fullname: string) => {
+        const query = 'SELECT * FROM singers WHERE fullname = $1';
+        return db.query(query, [fullname]).then((response) => {
             return response.rows[0];
         });
     },
-    update: (id: number, username: string, is_admin: boolean) => {
-        const query = `UPDATE users SET username = $1, is_admin=$2 WHERE id = $3 RETURNING *`;
+    update: (
+        id: number,
+        profile_photo: string,
+        fullname: string,
+        instrument: string
+    ) => {
+        const query = `UPDATE singers SET profile_photo =$1, fullname = $2, instrument=$3 WHERE id = $4 RETURNING *`;
         return db
-            .query(query, [username, is_admin, id])
+            .query(query, [profile_photo, fullname, instrument, id])
             .then((response: any) => {
                 return response.rows ? response.rows[0] : {};
             });
     },
-    create: ({ username, password, is_admin = false }) => {
+    create: ({ profile_photo, fullname, instrument }) => {
         const query =
-            'INSERT INTO users (username, password, is_admin) VALUES($1, $2, $3) RETURNING *';
+            'INSERT INTO singers (profile_photo, fullname, instrument) VALUES($1, $2,$3) RETURNING *';
         return db
-            .query(query, [username, password, is_admin])
+            .query(query, [profile_photo, fullname, instrument])
             .then((response: any) => {
                 return response.rows && response.rows.length > 0
                     ? response.rows[0]
@@ -46,7 +52,7 @@ export const Users = {
             });
     },
     delete: (id: number) => {
-        const query = `DELETE FROM users WHERE id = $1`;
+        const query = `DELETE FROM singers WHERE id = $1`;
         return db.query(query, [id]).then(() => {
             return true;
         });

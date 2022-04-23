@@ -1,19 +1,78 @@
-import { TextField } from '@mui/material';
-import React, { useState } from 'react';
-import DateTimePicker from 'react-datetime-picker';
+import {
+    Autocomplete,
+    Button,
+    InputLabel,
+    MenuItem,
+    Select,
+    TextField,
+} from '@mui/material';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { useNavigate } from 'react-router-dom';
 export function AddEvent() {
     const [value, onChange] = useState(new Date());
+    const navigate = useNavigate();
+    const [selectedSinger, setSelectedSinger] = useState<any>(null);
+    const [singers, setSingers] = useState<any>([]);
     const [createEventData, setCreateEventData] = useState<any>({
+        singer_id: '',
         name: '',
         date: new Date(),
     });
     console.log(value);
+
+    const signup = () => {
+        axios
+            .post('/api/events', {
+                singer_id: 1, //createEventData.singer_id
+                name: createEventData.name,
+                date: createEventData.date,
+            })
+            .then(() => navigate('/events'));
+    };
+
+    useEffect(() => {
+        const singerI = () => {
+            axios
+                .get('/api/singers')
+                .then((response: any) => response.data)
+                .then((data: any) => {
+                    setSingers(data);
+                });
+        };
+
+        singerI();
+    }, []);
+
+    console.log(setSingers);
 
     const setFieldValue = (field: string, value: any) => {
         setCreateEventData({ ...createEventData, [field]: value });
     };
     return (
         <div>
+            <InputLabel id='select-singer.'>Select Singer</InputLabel>
+            <Autocomplete
+                disablePortal
+                id='combo-box-demo'
+                options={(singers ?? []).map((singer: any) => {
+                    // console.log(singer);
+                    return { label: singer.fullname, id: singer.id };
+                })}
+                onChange={(event: any, newValue: any) => {
+                    console.log(newValue);
+                    setFieldValue('singer_id', newValue.id);
+                    setSelectedSinger(newValue);
+                }}
+                // sx={{ width: 300 }}
+                renderInput={(params) => (
+                    <TextField {...params} label='Select Singer' />
+                )}
+                value={selectedSinger}
+            />
+
             <TextField
                 helperText='Please enter your/event name'
                 id='event-create-name'
@@ -23,10 +82,15 @@ export function AddEvent() {
                 }
                 value={createEventData.name}
             />
-            <DateTimePicker
+            <DatePicker
                 onChange={(value: any) => setFieldValue('date', value)}
                 value={createEventData.date}
+                renderInput={(params: any) => <TextField {...params} />}
             />
+
+            <Button onClick={signup} color='success' variant='contained'>
+                Create Event.
+            </Button>
         </div>
     );
 }

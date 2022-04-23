@@ -1,11 +1,8 @@
 import { Box, Button } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
-import { ApplicationContext } from '../../application-context';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import Icon from '@mui/material/Icon';
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -33,40 +30,41 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-export function UsersTable() {
-    const [appState, appAction] = useContext(ApplicationContext);
-    const [userData, setUserData] = useState<any>([]);
-
+export function SingersTable() {
+    const [singers, setSingers] = useState<any>([]);
+    const navigate = useNavigate();
     useEffect(() => {
         axios
-            .get('/api/users')
+            .get('/api/singers')
             .then((response: any) => response.data)
             .then((data: any) => {
-                setUserData(data);
+                setSingers(data);
             });
     }, []);
+    console.log(singers.profile_photo);
 
     return (
         <>
             <h1>
-                Users
+                Singers{' '}
                 <Button
                     color='success'
                     variant='contained'
-                    href='/admin/user/add'>
-                    Add User
+                    href='/admin/singer/add'>
+                    Add Singer
                 </Button>
             </h1>
+
             <div className='adminPage'>
                 <Box sx={{ minWidth: 120 }}>
                     <Button>
                         <Link to='/admin/'>Back to Admin</Link>
                     </Button>
                     <Button>
-                        <Link to='/admin/events'>Back to Events</Link>
+                        <Link to='/admin/users'>Back to Users</Link>
                     </Button>
                     <Button>
-                        <Link to='/admin/singers'>Back to Singers</Link>
+                        <Link to='/admin/events'>Back to Events</Link>
                     </Button>
                     <TableContainer component={Paper}>
                         <Table
@@ -76,10 +74,13 @@ export function UsersTable() {
                                 <TableRow>
                                     <StyledTableCell>ID</StyledTableCell>
                                     <StyledTableCell align='right'>
-                                        Username
+                                        Profile Photo
                                     </StyledTableCell>
                                     <StyledTableCell align='right'>
-                                        Is Admin
+                                        Full Name
+                                    </StyledTableCell>
+                                    <StyledTableCell align='right'>
+                                        Instrument
                                     </StyledTableCell>
                                     <StyledTableCell align='right'>
                                         Edit
@@ -87,8 +88,8 @@ export function UsersTable() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {userData &&
-                                    userData.map((e: any) => (
+                                {singers &&
+                                    singers.map((e: any) => (
                                         <StyledTableRow key={e.id}>
                                             <StyledTableCell
                                                 component='th'
@@ -96,30 +97,23 @@ export function UsersTable() {
                                                 {e.id}
                                             </StyledTableCell>
                                             <StyledTableCell align='right'>
-                                                {e.username}
+                                                <img
+                                                    height='60px'
+                                                    width='70px'
+                                                    src={e.profile_photo}
+                                                />
                                             </StyledTableCell>
                                             <StyledTableCell align='right'>
-                                                {e.is_admin ? (
-                                                    <Icon
-                                                        sx={{
-                                                            color: 'green',
-                                                        }}>
-                                                        done
-                                                    </Icon>
-                                                ) : (
-                                                    <Icon
-                                                        sx={{
-                                                            color: 'red',
-                                                        }}>
-                                                        clear
-                                                    </Icon>
-                                                )}
+                                                {e.fullname}
+                                            </StyledTableCell>
+                                            <StyledTableCell align='right'>
+                                                {e.instrument}
                                             </StyledTableCell>
                                             <StyledTableCell align='right'>
                                                 <Button>
                                                     <Link
-                                                        to={`/admin/user/${e.id}`}>
-                                                        Edit User
+                                                        to={`/admin/singer/${e.id}`}>
+                                                        Edit Singer
                                                     </Link>
                                                 </Button>
                                             </StyledTableCell>

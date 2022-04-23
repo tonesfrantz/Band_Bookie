@@ -10,6 +10,7 @@ const router = express.Router();
 router.post('/', errorHandler, (req: any, res: any) => {
     const username = req.body.username;
     const password = req.body.password;
+
     Users.getByUsername(username).then((userNameResponse: any) => {
         // Check the password (and/or email)
         // if it is correct
@@ -17,12 +18,13 @@ router.post('/', errorHandler, (req: any, res: any) => {
             userNameResponse &&
             bcrypt.compareSync(password, userNameResponse.password);
         if (username === userNameResponse.username && valid === true) {
-            // req.session.id = userNameResponse.id;
+            const { username, is_admin } = userNameResponse;
+            // req.session.id = id;
             req.session.username = username;
+            req.session.is_admin = is_admin;
             res.status(200).json({
-                id: userNameResponse.id,
-                username: userNameResponse.username,
-                is_admin: userNameResponse.is_admin,
+                username,
+                is_admin,
             });
         } else {
             res.status(400).json({
@@ -38,6 +40,7 @@ router.get('/', (req: any, res: any) => {
     if (req.session.username) {
         res.json({
             username: req.session.username,
+            is_admin: req.session.is_admin,
         });
     } else {
         // 401 - Unauthorised

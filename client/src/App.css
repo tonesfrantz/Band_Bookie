@@ -1,9 +1,74 @@
-body {
-    background-color: aliceblue;
-    margin: 10px
+.App {
+    display: grid;
+    /* place-content: top; */
+    background: #000 url("./assets/images/WeddingBackground.jpg" ) no-repeat fixed center;
+    text-align: center;
+    background-size: cover;
+    min-height: 100vh;
+}
+.title_component {
+    top: 0
+}
+.App-header {
+    text-shadow: #000;
+    background-color: #333;
+    height: 80px;
+    padding: 10px;
+    color: white;
 }
 
-.navbar {
-    display: flex;
-    flex-direction: column;
+body {
+
+    /* background-image: url("../static/WeddingBackground.jpg"); */
+    margin: 10px
 }
+.title{
+    
+    text-align: center;
+}
+
+/* .navbar{
+    
+
+} */
+.navbar ul {
+    list-style: none;
+    text-align: center;
+  
+}
+.navbar ul li {
+    display: inline-block;
+    margin-right: 10px;  
+}
+
+.navbar ul li a{
+    text-decoration: none;
+    color: black
+}
+
+.navbar ul li a:hover {
+    text-decoration: underline;
+    color: #333;
+}
+
+.adminPage{
+    list-style: none;
+    
+}
+
+.adminPage li{
+    display: inline-block;
+    margin: 10px;
+    font-size: 1.2em;
+    
+}
+
+.adminPage a{
+    
+    text-decoration: none;
+    color: black
+}
+.adminPage a:hover {
+    text-decoration: underline;
+    color: #333;
+    }

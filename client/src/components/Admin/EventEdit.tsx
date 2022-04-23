@@ -40,6 +40,14 @@ export function EventEdit() {
                 alert('Something went wrong. Not Updated!');
             });
     };
+    const submitDeleteEvent = () => {
+        axios
+            .delete(`/api/events/${id}`)
+            .then(() => navigate('/admin/events'))
+            .catch(() => {
+                alert('Something went wrong. Not Deleted');
+            });
+    };
     return (
         <>
             <h3>
@@ -69,6 +77,12 @@ export function EventEdit() {
                         color='success'
                         variant='contained'>
                         Update
+                    </Button>
+                    <Button
+                        onClick={submitDeleteEvent}
+                        color='success'
+                        variant='contained'>
+                        Delete
                     </Button>
                 </Box>
             </form>

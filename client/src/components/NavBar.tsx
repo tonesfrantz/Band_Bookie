@@ -17,14 +17,14 @@ export function NavBar() {
                     <Link to='/addevent'>Create Event</Link>
                 </li>
                 {currentUser == null && (
-                    <div>
+                    <>
                         <li>
                             <Link to='/login'>Login</Link>
                         </li>
                         <li>
                             <Link to='/signup'>SignUp</Link>
                         </li>
-                    </div>
+                    </>
                 )}
                 {currentUser && (
                     <>
