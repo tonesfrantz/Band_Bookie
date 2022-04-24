@@ -50,22 +50,19 @@ export function UsersTable() {
         <>
             <h1>
                 Users
-                <Button
-                    color='success'
-                    variant='contained'
-                    href='/admin/user/add'>
-                    Add User
+                <Button variant='contained' color='success'>
+                    <Link to='/admin/users/add'>Add User</Link>
                 </Button>
             </h1>
             <div className='adminPage'>
                 <Box sx={{ minWidth: 120 }}>
-                    <Button>
+                    <Button variant='outlined'>
                         <Link to='/admin/'>Back to Admin</Link>
                     </Button>
-                    <Button>
+                    <Button variant='outlined'>
                         <Link to='/admin/events'>Back to Events</Link>
                     </Button>
-                    <Button>
+                    <Button variant='outlined'>
                         <Link to='/admin/singers'>Back to Singers</Link>
                     </Button>
                     <TableContainer component={Paper}>
@@ -116,7 +113,7 @@ export function UsersTable() {
                                                 )}
                                             </StyledTableCell>
                                             <StyledTableCell align='right'>
-                                                <Button>
+                                                <Button variant='outlined'>
                                                     <Link
                                                         to={`/admin/user/${e.id}`}>
                                                         Edit User

@@ -27,6 +27,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { SingersTable } from './components/Admin/SingersTable';
 import { SingerEdit } from './components/Admin/SingerEdit';
 import { AddSinger } from './components/Admin/AddSinger';
+import { SingerList } from './components/SingerList';
+import { UserAdd } from './components/Admin/UserAdd';
 
 function App() {
     const [appState, appAction] = useReducer(
@@ -72,6 +74,10 @@ function App() {
                                 element={<EventsTable />}
                             />
                             <Route
+                                path='admin/users/add'
+                                element={<UserAdd />}
+                            />
+                            <Route
                                 path='admin/users'
                                 element={<UsersTable />}
                             />
@@ -97,6 +103,7 @@ function App() {
                             <Route path='login' element={<LoginPage />} />
                             <Route path='logout' element={<LogoutPage />} />
                             <Route path='signup' element={<Signup />} />
+                            <Route path='singerlist' element={<SingerList />} />
 
                             <Route
                                 path='*'

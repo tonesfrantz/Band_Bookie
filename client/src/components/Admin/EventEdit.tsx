@@ -1,7 +1,8 @@
-import { Box, Button, TextField } from '@mui/material';
+import { Box, Button, TableContainer, TextField } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Paper from '@mui/material/Paper';
 
 export function EventEdit() {
     const { id } = useParams();
@@ -55,35 +56,43 @@ export function EventEdit() {
             </h3>
             <form>
                 <Box sx={{ minWidth: 120 }}>
-                    <TextField
-                        helperText='Please edit name here'
-                        id='event-edit-name'
-                        onChange={(event: any) =>
-                            setFieldValue('name', event.target.value)
-                        }
-                        value={event.name}
-                    />
-                    <TextField
-                        helperText='Please edit date here'
-                        id='event-edit-date'
-                        onChange={(event: any) =>
-                            setFieldValue('name', event.target.value)
-                        }
-                        value={event.date}
-                    />
+                    <TableContainer component={Paper}>
+                        <Button
+                            href='/admin/events'
+                            color='error'
+                            variant='contained'>
+                            Back
+                        </Button>
+                        <TextField
+                            helperText='Please edit name here'
+                            id='event-edit-name'
+                            onChange={(event: any) =>
+                                setFieldValue('name', event.target.value)
+                            }
+                            value={event.name}
+                        />
+                        <TextField
+                            helperText='Please edit date here'
+                            id='event-edit-date'
+                            onChange={(event: any) =>
+                                setFieldValue('name', event.target.value)
+                            }
+                            value={event.date}
+                        />
 
-                    <Button
-                        onClick={submitEditEvent}
-                        color='success'
-                        variant='contained'>
-                        Update
-                    </Button>
-                    <Button
-                        onClick={submitDeleteEvent}
-                        color='success'
-                        variant='contained'>
-                        Delete
-                    </Button>
+                        <Button
+                            onClick={submitEditEvent}
+                            color='success'
+                            variant='contained'>
+                            Update
+                        </Button>
+                        <Button
+                            onClick={submitDeleteEvent}
+                            color='success'
+                            variant='contained'>
+                            Delete
+                        </Button>
+                    </TableContainer>
                 </Box>
             </form>
         </>

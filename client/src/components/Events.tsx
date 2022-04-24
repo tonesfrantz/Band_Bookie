@@ -56,7 +56,7 @@ export function Events() {
             </h1>
             <div>
                 <TableContainer
-                    sx={{ padding: 10, width: '80%' }}
+                    sx={{ width: '90%', margin: '30px' }}
                     component={Paper}>
                     <Table aria-label='customized table'>
                         <TableHead>

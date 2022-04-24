@@ -1,9 +1,17 @@
 import { ArrowDropDown } from '@mui/icons-material';
-import { Button, TextField, Select, MenuItem, InputLabel } from '@mui/material';
+import {
+    Button,
+    TextField,
+    Select,
+    MenuItem,
+    InputLabel,
+    TableContainer,
+} from '@mui/material';
 import { Box } from '@mui/system';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Paper from '@mui/material/Paper';
 
 export function SingerEdit() {
     const { id } = useParams();
@@ -52,42 +60,53 @@ export function SingerEdit() {
             </h3>
             <form className='adminPage'>
                 <Box sx={{ minWidth: 120 }}>
-                    <TextField
-                        helperText='Please edit profile photo URL here'
-                        id='singer-edit-photo'
-                        onChange={(event: any) =>
-                            setFieldValue('profile_photo', event.target.value)
-                        }
-                        value={singer.profile_photo}
-                    />
-                    <TextField
-                        helperText='Please edit full name here'
-                        id='singer-edit-name'
-                        onChange={(event: any) =>
-                            setFieldValue('fullname', event.target.value)
-                        }
-                        value={singer.fullname}
-                    />
-                    <TextField
-                        helperText='Please edit instrument here'
-                        id='singer-edit-instrument'
-                        onChange={(event: any) =>
-                            setFieldValue('instrument', event.target.value)
-                        }
-                        value={singer.instrument}
-                    />
-                    <Button
-                        onClick={submitEditSinger}
-                        color='success'
-                        variant='contained'>
-                        Update
-                    </Button>
-                    <Button
-                        onClick={submitDeleteSinger}
-                        color='success'
-                        variant='contained'>
-                        Delete
-                    </Button>
+                    <TableContainer component={Paper}>
+                        <Button
+                            href='/admin/singers'
+                            color='error'
+                            variant='contained'>
+                            Back
+                        </Button>
+                        <TextField
+                            helperText='Please edit profile photo URL here'
+                            id='singer-edit-photo'
+                            onChange={(event: any) =>
+                                setFieldValue(
+                                    'profile_photo',
+                                    event.target.value
+                                )
+                            }
+                            value={singer.profile_photo}
+                        />
+                        <TextField
+                            helperText='Please edit full name here'
+                            id='singer-edit-name'
+                            onChange={(event: any) =>
+                                setFieldValue('fullname', event.target.value)
+                            }
+                            value={singer.fullname}
+                        />
+                        <TextField
+                            helperText='Please edit instrument here'
+                            id='singer-edit-instrument'
+                            onChange={(event: any) =>
+                                setFieldValue('instrument', event.target.value)
+                            }
+                            value={singer.instrument}
+                        />
+                        <Button
+                            onClick={submitEditSinger}
+                            color='success'
+                            variant='contained'>
+                            Update
+                        </Button>
+                        <Button
+                            onClick={submitDeleteSinger}
+                            color='success'
+                            variant='contained'>
+                            Delete
+                        </Button>
+                    </TableContainer>
                 </Box>
             </form>
         </>

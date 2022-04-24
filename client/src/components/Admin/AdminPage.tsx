@@ -3,11 +3,12 @@ import axios from 'axios';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ApplicationContext } from '../../application-context';
+import Paper from '@mui/material/Paper';
 
 export function AdminPage() {
     return (
         <div className='adminPage'>
-            <Box sx={{ minWidth: 120 }}>
+            <Box sx={{ width: '90%', margin: '30px' }} component={Paper}>
                 <li>
                     <Link to='/admin/users'>Users</Link>
                 </li>

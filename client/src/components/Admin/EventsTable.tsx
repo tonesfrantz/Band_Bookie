@@ -53,13 +53,13 @@ export function EventsTable() {
             </h1>
             <div className='adminPage'>
                 <Box sx={{ minWidth: 120 }}>
-                    <Button>
+                    <Button variant='outlined'>
                         <Link to='/admin/'>Back to Admin</Link>
                     </Button>
-                    <Button>
+                    <Button variant='outlined'>
                         <Link to='/admin/users'>Back to Users</Link>
                     </Button>
-                    <Button>
+                    <Button variant='outlined'>
                         <Link to='/admin/singers'>Back to Singers</Link>
                     </Button>
                     <TableContainer component={Paper}>
@@ -110,7 +110,7 @@ export function EventsTable() {
                                                 )}
                                             </StyledTableCell>
                                             <StyledTableCell align='right'>
-                                                <Button>
+                                                <Button variant='outlined'>
                                                     <Link
                                                         to={`/admin/event/${e.id}`}>
                                                         Edit Event

@@ -1,4 +1,10 @@
-import { Button, TableContainer, TextField } from '@mui/material';
+import {
+    Button,
+    MenuItem,
+    Select,
+    TableContainer,
+    TextField,
+} from '@mui/material';
 import { Box } from '@mui/system';
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer, useState } from 'react';
@@ -10,30 +16,34 @@ import {
     ApplicationContext,
     ApplicationContextReducer,
     DefaultApplicationState,
-} from './../application-context';
+} from '../../application-context';
 
-export function Signup() {
+export function UserAdd() {
     const [appState, appAction] = useContext(ApplicationContext);
     const navigate = useNavigate();
     const [signUpData, setSignUpData] = useState<any>({
         username: '',
         password: '',
         password_confirmation: '',
+        is_admin: false,
     });
 
     useEffect(() => {
-        if (appState.currentUser) {
-            navigate('/');
+        if (appState.currentUser?.is_admin) {
+            navigate('/admin/users/add');
         } else {
+            alert('You are not Admin - can not add users');
+            navigate('/');
         }
     }, [appState.currentUser]);
-
+    // console.log(appState.currentUser);
     const signup = () => {
         if (signUpData.password === signUpData.password_confirmation) {
             axios
                 .post('/api/users', {
                     username: signUpData.username,
                     password: signUpData.password,
+                    is_admin: signUpData.is_admin,
                 })
                 .then((response: any) => response.data)
                 .then((data: any) => {
@@ -89,6 +99,17 @@ export function Signup() {
                     }
                     label='Password_Confirmation'
                 />
+                <Select
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
+                    value={signUpData.is_admin ? 1 : 0}
+                    label='Is Admin'
+                    onChange={(event: any) =>
+                        setFieldValue('is_admin', event.target.value)
+                    }>
+                    <MenuItem value={1}>Yes - Full Access</MenuItem>
+                    <MenuItem value={0}>No - Partial Access</MenuItem>
+                </Select>
                 <Button onClick={signup} color='success' variant='contained'>
                     Sign-up
                 </Button>

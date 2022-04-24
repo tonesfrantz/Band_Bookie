@@ -28,6 +28,7 @@ router.post('/', errorHandler, (req: any, res: any, next: any) => {
             }
             req.session.userId = user.id;
             req.session.username = user.username;
+            req.session.is_admin = user.is_admin;
             return res.json(user);
         })
         .catch((error: any) => {

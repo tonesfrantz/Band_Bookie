@@ -1,7 +1,8 @@
-import { Button, TextField } from '@mui/material';
+import { Box, Button, TableContainer, TextField } from '@mui/material';
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Paper from '@mui/material/Paper';
 
 import {
     ActionType,
@@ -13,7 +14,6 @@ import {
 let defaultErrors = {
     error_username: false,
     error_password: false,
-    error_confirm_password: false,
 };
 
 export function LoginPage() {
@@ -22,7 +22,6 @@ export function LoginPage() {
     const [loginFormData, setLoginFormData] = useState<any>({
         username: '',
         password: '',
-        password_confirmation: '',
     });
     //Trying to have a front end Error Handlerto change color of button.
     const [errorHandler, setErrorhandle] = useState<any>(defaultErrors);
@@ -42,11 +41,6 @@ export function LoginPage() {
         if (loginFormData.password === '') {
             hasError = true;
             loginErrors.error_password = true;
-        }
-
-        if (loginFormData.password_confirmation !== loginFormData.password) {
-            hasError = true;
-            loginErrors.error_confirm_password = true;
         }
 
         if (!hasError) {
@@ -91,40 +85,34 @@ export function LoginPage() {
         <>
             <h3>Login Page</h3>
             {/* put helpertext in state for error handler. */}
-            <TextField
-                helperText='Please enter your name'
-                error={errorHandler.error_username} // The errorHandler State will make this false... The useEffect will tell you if it's false bn
-                id='loginform-name'
-                label='Username'
-                onChange={(event: any) =>
-                    setFieldValue('username', event.target.value)
-                }
-                value={loginFormData.username}
-            />
-            <TextField
-                type='password'
-                helperText='Please enter password'
-                error={errorHandler.error_password}
-                id='loginform-password'
-                onChange={(event: any) =>
-                    setFieldValue('password', event.target.value)
-                }
-                label='Password'
-            />
-            <TextField
-                type='password'
-                helperText='Please re-enter your password'
-                error={errorHandler.error_confirm_password}
-                id='loginform-password_confirmation'
-                onChange={(event: any) =>
-                    setFieldValue('password_confirmation', event.target.value)
-                }
-                label='Password_Confirmation'
-            />
+            <TableContainer
+                sx={{ width: '90%', margin: '30px' }}
+                component={Paper}>
+                <TextField
+                    helperText='Please enter your name'
+                    error={errorHandler.error_username} // The errorHandler State will make this false... The useEffect will tell you if it's false bn
+                    id='loginform-name'
+                    label='Username'
+                    onChange={(event: any) =>
+                        setFieldValue('username', event.target.value)
+                    }
+                    value={loginFormData.username}
+                />
+                <TextField
+                    type='password'
+                    helperText='Please enter password'
+                    error={errorHandler.error_password}
+                    id='loginform-password'
+                    onChange={(event: any) =>
+                        setFieldValue('password', event.target.value)
+                    }
+                    label='Password'
+                />
 
-            <Button onClick={login} color='success' variant='contained'>
-                Login
-            </Button>
+                <Button onClick={login} color='success' variant='contained'>
+                    Login
+                </Button>
+            </TableContainer>
         </>
     );
 }

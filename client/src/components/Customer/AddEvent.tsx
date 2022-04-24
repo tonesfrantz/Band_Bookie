@@ -4,10 +4,12 @@ import {
     InputLabel,
     MenuItem,
     Select,
+    TableContainer,
     TextField,
 } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Paper from '@mui/material/Paper';
 
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useNavigate } from 'react-router-dom';
@@ -53,44 +55,48 @@ export function AddEvent() {
     };
     return (
         <div>
-            <InputLabel id='select-singer.'>Select Singer</InputLabel>
-            <Autocomplete
-                disablePortal
-                id='combo-box-demo'
-                options={(singers ?? []).map((singer: any) => {
-                    // console.log(singer);
-                    return { label: singer.fullname, id: singer.id };
-                })}
-                onChange={(event: any, newValue: any) => {
-                    console.log(newValue);
-                    setFieldValue('singer_id', newValue.id);
-                    setSelectedSinger(newValue);
-                }}
-                // sx={{ width: 300 }}
-                renderInput={(params) => (
-                    <TextField {...params} label='Select Singer' />
-                )}
-                value={selectedSinger}
-            />
+            <h1>Select Singer</h1>
+            <TableContainer
+                sx={{ width: '90%', margin: '30px' }}
+                component={Paper}>
+                <Autocomplete
+                    disablePortal
+                    id='combo-box-demo'
+                    options={(singers ?? []).map((singer: any) => {
+                        // console.log(singer);
+                        return { label: singer.fullname, id: singer.id };
+                    })}
+                    onChange={(event: any, newValue: any) => {
+                        console.log(newValue);
+                        setFieldValue('singer_id', newValue.id);
+                        setSelectedSinger(newValue);
+                    }}
+                    // sx={{ width: 300 }}
+                    renderInput={(params) => (
+                        <TextField {...params} label='Select Singer' />
+                    )}
+                    value={selectedSinger}
+                />
 
-            <TextField
-                helperText='Please enter your/event name'
-                id='event-create-name'
-                label='Name/Event Name'
-                onChange={(event: any) =>
-                    setFieldValue('name', event.target.value)
-                }
-                value={createEventData.name}
-            />
-            <DatePicker
-                onChange={(value: any) => setFieldValue('date', value)}
-                value={createEventData.date}
-                renderInput={(params: any) => <TextField {...params} />}
-            />
+                <TextField
+                    helperText='Please enter your/event name'
+                    id='event-create-name'
+                    label='Name/Event Name'
+                    onChange={(event: any) =>
+                        setFieldValue('name', event.target.value)
+                    }
+                    value={createEventData.name}
+                />
+                <DatePicker
+                    onChange={(value: any) => setFieldValue('date', value)}
+                    value={createEventData.date}
+                    renderInput={(params: any) => <TextField {...params} />}
+                />
 
-            <Button onClick={signup} color='success' variant='contained'>
-                Create Event.
-            </Button>
+                <Button onClick={signup} color='success' variant='contained'>
+                    Create Event.
+                </Button>
+            </TableContainer>
         </div>
     );
 }

@@ -57,13 +57,13 @@ export function SingersTable() {
 
             <div className='adminPage'>
                 <Box sx={{ minWidth: 120 }}>
-                    <Button>
+                    <Button variant='outlined'>
                         <Link to='/admin/'>Back to Admin</Link>
                     </Button>
-                    <Button>
+                    <Button variant='outlined'>
                         <Link to='/admin/users'>Back to Users</Link>
                     </Button>
-                    <Button>
+                    <Button variant='outlined'>
                         <Link to='/admin/events'>Back to Events</Link>
                     </Button>
                     <TableContainer component={Paper}>
@@ -110,7 +110,7 @@ export function SingersTable() {
                                                 {e.instrument}
                                             </StyledTableCell>
                                             <StyledTableCell align='right'>
-                                                <Button>
+                                                <Button variant='outlined'>
                                                     <Link
                                                         to={`/admin/singer/${e.id}`}>
                                                         Edit Singer
