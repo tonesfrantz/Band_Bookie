@@ -3,13 +3,19 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ApplicationContext } from '../application-context';
 import Paper from '@mui/material/Paper';
+import { borderRadius } from '@mui/system';
 
 export function NavBar() {
     const [{ currentUser }, appAction] = useContext(ApplicationContext);
     return (
         <nav className='navbar'>
             <TableContainer
-                sx={{ width: '90%', margin: '30px' }}
+                sx={{
+                    width: '90%',
+                    margin: '30px',
+                    border: '2px solid black',
+                    borderRadius: '5px',
+                }}
                 component={Paper}>
                 <ul>
                     <li>

@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -11,6 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import moment from 'moment';
+import { ApplicationContext } from '../application-context';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -33,6 +34,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export function Events() {
     const [events, setEvents] = useState<any>([]);
+    const [{ currentUser }, appAction] = useContext(ApplicationContext);
 
     useEffect(() => {
         axios
@@ -47,12 +49,16 @@ export function Events() {
         <>
             <h1>
                 Upcoming Events:
-                <Button
-                    color='success'
-                    variant='contained'
-                    href='/admin/events'>
-                    Edit
-                </Button>
+                {currentUser?.is_admin && (
+                    <>
+                        <Button
+                            color='success'
+                            variant='contained'
+                            href='/admin/events'>
+                            Edit
+                        </Button>
+                    </>
+                )}
             </h1>
             <div>
                 <TableContainer

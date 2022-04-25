@@ -1,6 +1,6 @@
 import { Box, Button } from '@mui/material';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -11,6 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import moment from 'moment';
+import { ApplicationContext } from '../../application-context';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -33,6 +34,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export function EventsTable() {
     const [events, setEvents] = useState<any>([]);
+    const [{ currentUser }, appAction] = useContext(ApplicationContext);
     useEffect(() => {
         axios
             .get('/api/events')
@@ -81,9 +83,13 @@ export function EventsTable() {
                                     <StyledTableCell align='right'>
                                         Date
                                     </StyledTableCell>
-                                    <StyledTableCell align='right'>
-                                        Edit
-                                    </StyledTableCell>
+                                    {currentUser?.is_admin && (
+                                        <>
+                                            <StyledTableCell align='right'>
+                                                Edit
+                                            </StyledTableCell>
+                                        </>
+                                    )}
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -109,14 +115,18 @@ export function EventsTable() {
                                                     'dddd Do, MMMM, yyyy'
                                                 )}
                                             </StyledTableCell>
-                                            <StyledTableCell align='right'>
-                                                <Button variant='outlined'>
-                                                    <Link
-                                                        to={`/admin/event/${e.id}`}>
-                                                        Edit Event
-                                                    </Link>
-                                                </Button>
-                                            </StyledTableCell>
+                                            {currentUser?.is_admin && (
+                                                <>
+                                                    <StyledTableCell align='right'>
+                                                        <Button variant='outlined'>
+                                                            <Link
+                                                                to={`/admin/event/${e.id}`}>
+                                                                Edit Event
+                                                            </Link>
+                                                        </Button>
+                                                    </StyledTableCell>
+                                                </>
+                                            )}
                                         </StyledTableRow>
                                     ))}
                             </TableBody>

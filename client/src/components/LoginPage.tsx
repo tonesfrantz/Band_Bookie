@@ -86,7 +86,12 @@ export function LoginPage() {
             <h3>Login Page</h3>
             {/* put helpertext in state for error handler. */}
             <TableContainer
-                sx={{ width: '90%', margin: '30px' }}
+                sx={{
+                    width: '90%',
+                    margin: '30px',
+                    padding: '20px',
+                    height: '40%',
+                }}
                 component={Paper}>
                 <TextField
                     helperText='Please enter your name'

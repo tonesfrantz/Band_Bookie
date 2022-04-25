@@ -5,13 +5,13 @@ import { db } from '../database/db';
 export const Events = {
     getAll: () => {
         const query =
-            'SELECT events.*,singers.fullname as singer_name FROM events INNER JOIN singers ON singers.id = events.singer_id ORDER BY id';
+            'SELECT events.*,singers.fullname as singer_name FROM events INNER JOIN singers ON singers.id = events.singer_id ORDER BY events.id';
         return db.query(query).then((response: any) => {
             return response.rows;
         });
     },
     getById: (id: number) => {
-        const query = `SELECT events.*,singers.fullname as singer_name FROM events INNER JOIN singers ON singers.id = events.singer_id WHERE id = $1`;
+        const query = `SELECT events.*,singers.fullname as singer_name FROM events INNER JOIN singers ON singers.id = events.singer_id WHERE events.id = $1`;
         return db.query(query, [id]).then((response: any) => {
             return response.rows ? response.rows[0] : {};
         });

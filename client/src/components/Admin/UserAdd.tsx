@@ -65,9 +65,14 @@ export function UserAdd() {
     // console.log(appState);
     return (
         <>
-            <h3>Signup page</h3>
+            <h3>Add User</h3>
             <TableContainer
-                sx={{ padding: 10, width: '80%', margin: '30px' }}
+                sx={{
+                    width: '90%',
+                    margin: '30px',
+                    height: '50%',
+                    padding: '20px',
+                }}
                 component={Paper}>
                 <TextField
                     helperText='Please enter your username'
@@ -111,7 +116,7 @@ export function UserAdd() {
                     <MenuItem value={0}>No - Partial Access</MenuItem>
                 </Select>
                 <Button onClick={signup} color='success' variant='contained'>
-                    Sign-up
+                    Add User
                 </Button>
             </TableContainer>
         </>

@@ -8,7 +8,14 @@ import Paper from '@mui/material/Paper';
 export function AdminPage() {
     return (
         <div className='adminPage'>
-            <Box sx={{ width: '90%', margin: '30px' }} component={Paper}>
+            <Box
+                sx={{
+                    width: '90%',
+                    margin: '30px',
+                    border: '2px solid black',
+                    borderRadius: '5px',
+                }}
+                component={Paper}>
                 <li>
                     <Link to='/admin/users'>Users</Link>
                 </li>

@@ -14,6 +14,9 @@ CREATE TABLE users(
 CREATE TABLE events(
     id SERIAL PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
+    email VARCHAR(128) NOT NULL UNIQUE,
+    phone INT,
+    band_size INT NOT NULL,
     singer_id INT NOT NULL,
     date TIMESTAMP NOT NULL
 );
@@ -35,9 +38,16 @@ VALUES
     );
 
 INSERT INTO
-    events (name, singer_id, date)
+    events (name, email, phone, band_size singer_id, date)
 VALUES
-    ('FredAngela', 1, '2016-06-22');
+    (
+        'FredAngela',
+        'tony@gmail.com',
+        0443333555,
+        3,
+        1,
+        '2016-06-22'
+    );
 
 INSERT INTO
     singers (profile_photo, fullname, instrument)
