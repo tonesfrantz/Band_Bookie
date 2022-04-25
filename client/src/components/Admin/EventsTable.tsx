@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material';
+import { Avatar, Box, Button } from '@mui/material';
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -75,11 +75,21 @@ export function EventsTable() {
                                         Event Name
                                     </StyledTableCell>
                                     <StyledTableCell align='right'>
+                                        Client Email
+                                    </StyledTableCell>
+                                    <StyledTableCell align='right'>
+                                        Client Phone
+                                    </StyledTableCell>
+                                    <StyledTableCell align='right'>
+                                        Band Size
+                                    </StyledTableCell>
+                                    <StyledTableCell align='right'>
                                         Singer ID
                                     </StyledTableCell>
                                     <StyledTableCell align='right'>
                                         Singer Name
                                     </StyledTableCell>
+                                    <StyledTableCell align='right'></StyledTableCell>
                                     <StyledTableCell align='right'>
                                         Date
                                     </StyledTableCell>
@@ -105,10 +115,29 @@ export function EventsTable() {
                                                 {e.name}
                                             </StyledTableCell>
                                             <StyledTableCell align='right'>
+                                                {e.email}
+                                            </StyledTableCell>
+                                            <StyledTableCell align='right'>
+                                                {e.phone}
+                                            </StyledTableCell>
+                                            <StyledTableCell align='right'>
+                                                {e.band_size}
+                                            </StyledTableCell>
+                                            <StyledTableCell align='right'>
                                                 {e.singer_id}
                                             </StyledTableCell>
                                             <StyledTableCell align='right'>
                                                 {e.singer_name}
+                                            </StyledTableCell>
+                                            <StyledTableCell>
+                                                <Avatar
+                                                    // alt='Remy Sharp'
+                                                    src={e.singer_photo}
+                                                    sx={{
+                                                        width: 45,
+                                                        height: 45,
+                                                    }}
+                                                />
                                             </StyledTableCell>
                                             <StyledTableCell align='right'>
                                                 {moment(e.date).format(

@@ -51,7 +51,7 @@ export function UsersTable() {
             <h1>
                 Users
                 <Button variant='contained' color='success'>
-                    <Link to='/admin/users/add'>Add User</Link>
+                    <Link to='/admin/users/add'>Create User</Link>
                 </Button>
             </h1>
             <div className='adminPage'>

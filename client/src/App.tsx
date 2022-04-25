@@ -53,16 +53,17 @@ function App() {
     }, []);
 
     return (
-        <div className='App'>
-            <div className='title_component'>
-                <header className='App-header'>
-                    <h1 className='App-title'>Band Bookie</h1>
-                </header>
-            </div>
-            <LocalizationProvider dateAdapter={AdapterMoment}>
-                <ApplicationContext.Provider value={[appState, appAction]}>
-                    <BrowserRouter>
-                        <NavBar />
+        <LocalizationProvider dateAdapter={AdapterMoment}>
+            <ApplicationContext.Provider value={[appState, appAction]}>
+                <BrowserRouter>
+                    <div className='App'>
+                        <div className='title_component'>
+                            <header className='App-header'>
+                                <h1 className='App-title'>Band Bookie</h1>
+                            </header>
+                            <NavBar />
+                        </div>
+
                         <Routes>
                             <Route path='admin' element={<AdminPage />} />
                             <Route
@@ -110,10 +111,10 @@ function App() {
                                 element={<p>Page not found! Oh NO!</p>}
                             />
                         </Routes>
-                    </BrowserRouter>
-                </ApplicationContext.Provider>
-            </LocalizationProvider>
-        </div>
+                    </div>
+                </BrowserRouter>
+            </ApplicationContext.Provider>
+        </LocalizationProvider>
     );
 }
 

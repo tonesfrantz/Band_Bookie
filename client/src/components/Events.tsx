@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Avatar, Button } from '@mui/material';
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -62,7 +62,10 @@ export function Events() {
             </h1>
             <div>
                 <TableContainer
-                    sx={{ width: '90%', margin: '30px' }}
+                    sx={{
+                        width: '50%',
+                        margin: '30px auto',
+                    }}
                     component={Paper}>
                     <Table aria-label='customized table'>
                         <TableHead>
@@ -70,6 +73,7 @@ export function Events() {
                                 <StyledTableCell align='left'>
                                     Name
                                 </StyledTableCell>
+                                <StyledTableCell align='left'></StyledTableCell>
                                 <StyledTableCell align='right'>
                                     Date
                                 </StyledTableCell>
@@ -81,6 +85,16 @@ export function Events() {
                                     <StyledTableRow key={e.id}>
                                         <StyledTableCell align='left'>
                                             {e.name}
+                                        </StyledTableCell>
+                                        <StyledTableCell align='left'>
+                                            <Avatar
+                                                // alt='Remy Sharp'
+                                                src={e.singer_photo}
+                                                sx={{
+                                                    width: 45,
+                                                    height: 45,
+                                                }}
+                                            />
                                         </StyledTableCell>
                                         <StyledTableCell align='right'>
                                             {moment(e.date).format(

@@ -23,17 +23,21 @@ router.post('/', isLoggedIn, (req: any, res: any) => {
 });
 
 router.patch('/:id([0-9]+)', isLoggedIn, (req: any, res: any) => {
-    const { id, singer_id, name, date } = req.body;
-    Events.update(id, singer_id, name, date).then((response: any) => {
-        res.json({ message: 'Item updated' });
-    });
+    const { id, singer_id, name, email, phone, band_size, date } = req.body;
+    Events.update(id, singer_id, name, email, phone, band_size, date).then(
+        (response: any) => {
+            res.json({ message: 'Item updated' });
+        }
+    );
 });
 
 router.put('/', isLoggedIn, (req: any, res: any) => {
-    const { id, singer_id, name, date } = req.body;
-    Events.update(id, singer_id, name, date).then(() => {
-        res.json({ message: `Item updated` });
-    });
+    const { id, singer_id, name, email, phone, band_size, date } = req.body;
+    Events.update(id, singer_id, name, email, phone, band_size, date).then(
+        () => {
+            res.json({ message: `Item updated` });
+        }
+    );
 });
 
 router.delete('/:id([0-9]+)', isLoggedIn, (req: any, res: any) => {

@@ -15,7 +15,7 @@ CREATE TABLE events(
     id SERIAL PRIMARY KEY NOT NULL,
     name TEXT NOT NULL,
     email VARCHAR(128) NOT NULL UNIQUE,
-    phone INT,
+    phone TEXT,
     band_size INT NOT NULL,
     singer_id INT NOT NULL,
     date TIMESTAMP NOT NULL
@@ -35,18 +35,31 @@ VALUES
         'Tony',
         '$2b$10$yC5pTnskmmvbs/0hCPT3oONv3/fhCoM0utZoj0gJh9OhFzzk.S2B2',
         true
+    ),
+    (
+        'Gareth',
+        '$2b$10$yC5pTnskmmvbs/0hCPT3oONv3/fhCoM0utZoj0gJh9OhFzzk.S2B2',
+        false
     );
 
 INSERT INTO
-    events (name, email, phone, band_size singer_id, date)
+    events (name, email, phone, band_size, singer_id, date)
 VALUES
     (
-        'FredAngela',
+        'Fred Angela',
         'tony@gmail.com',
-        0443333555,
+        '0443333555',
         3,
         1,
         '2016-06-22'
+    ),
+    (
+        'Juan & Silvana',
+        'tonyf@gmail.com',
+        '04000000',
+        7,
+        1,
+        '2023-11-24'
     );
 
 INSERT INTO
@@ -56,6 +69,16 @@ VALUES
         '/assets/images/BessyFemaleSinger.jpg',
         'Bessy Sue Allen',
         'Piano'
+    ),
+    (
+        '/assets/images/Mariachi.jpg',
+        'Gonzalez',
+        'Guitar'
+    ),
+    (
+        '/assets/images/Male_singer.jpg',
+        'Jim Whau',
+        'Guitar'
     );
 
 {

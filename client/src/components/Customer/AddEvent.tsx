@@ -1,5 +1,7 @@
 import {
     Autocomplete,
+    Avatar,
+    Box,
     Button,
     FormControl,
     FormControlLabel,
@@ -31,12 +33,15 @@ export function AddEvent() {
         singer_id: '',
         date: new Date(),
     });
-    console.log(createEventData);
+    console.log(selectedSinger);
     const signup = () => {
         axios
             .post('/api/events', {
-                singer_id: 1, //createEventData.singer_id
+                singer_id: createEventData.singer_id, //createEventData.singer_id
                 name: createEventData.name,
+                email: createEventData.email,
+                phone: createEventData.phone,
+                band_size: createEventData.band_size,
                 date: createEventData.date,
             })
             .then(() => navigate('/events'));
@@ -55,7 +60,7 @@ export function AddEvent() {
         singerI();
     }, []);
 
-    console.log(setSingers);
+    console.log(selectedSinger);
 
     const setFieldValue = (field: string, value: any) => {
         setCreateEventData({ ...createEventData, [field]: value });
@@ -124,7 +129,11 @@ export function AddEvent() {
                     disablePortal
                     id='combo-box-demo'
                     options={(singers ?? []).map((singer: any) => {
-                        return { label: singer.fullname, id: singer.id };
+                        return {
+                            label: singer.fullname,
+                            id: singer.id,
+                            photo: singer.profile_photo,
+                        };
                     })}
                     onChange={(event: any, newValue: any) => {
                         console.log(newValue);
@@ -132,11 +141,30 @@ export function AddEvent() {
                         setSelectedSinger(newValue);
                     }}
                     // sx={{ width: 300 }}
+                    renderOption={(props, option) => (
+                        <Box
+                            component='li'
+                            // sx={{ mr: '5px', flexShrink: 5 }}
+                            {...props}>
+                            <Avatar
+                                // alt='Remy Sharp'
+                                src={option.photo}
+                                sx={{
+                                    width: 45,
+                                    height: 45,
+                                    mr: '10px',
+                                }}
+                            />
+                            <> </>
+                            {option.label}
+                        </Box>
+                    )}
                     renderInput={(params) => (
                         <TextField {...params} label='Select Singer' />
                     )}
                     value={selectedSinger}
                 />
+
                 <FormControl>
                     <FormLabel id='demo-row-radio-buttons-group-label'>
                         Band Size

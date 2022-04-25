@@ -57,7 +57,7 @@ export function Signup() {
         <>
             <h3>Signup page</h3>
             <TableContainer
-                sx={{ padding: 10, width: '80%', margin: '30px' }}
+                sx={{ padding: '10px', width: '80%', margin: '30px auto' }}
                 component={Paper}>
                 <TextField
                     helperText='Please enter your username'

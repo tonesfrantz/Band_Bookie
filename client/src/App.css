@@ -1,5 +1,5 @@
 .App {
-    display: grid;
+    /* display: grid; */
     /* place-content: top; */
     background: #000 url("./assets/images/WeddingBackground.jpg" ) no-repeat fixed center;
     text-align: center;
