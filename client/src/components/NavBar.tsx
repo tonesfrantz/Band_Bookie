@@ -24,9 +24,12 @@ export function NavBar() {
                     <li>
                         <Link to='/singerlist'>Artists/Singers</Link>
                     </li>
-                    <li>
-                        <Link to='/events'>Events</Link>
-                    </li>
+                    {currentUser?.is_admin && (
+                        <li>
+                            <Link to='/events'>Events</Link>
+                        </li>
+                    )}
+
                     <li>
                         <Link to='/addevent'>Create Event</Link>
                     </li>

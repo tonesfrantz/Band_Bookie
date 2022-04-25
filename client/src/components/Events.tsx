@@ -47,66 +47,64 @@ export function Events() {
     // console.log(events);
     return (
         <>
-            <h1>
-                Upcoming Events:
-                {currentUser?.is_admin && (
-                    <>
-                        <Button
-                            color='success'
-                            variant='contained'
-                            href='/admin/events'>
-                            Edit
-                        </Button>
-                    </>
-                )}
-            </h1>
-            <div>
-                <TableContainer
-                    sx={{
-                        width: '50%',
-                        margin: '30px auto',
-                    }}
-                    component={Paper}>
-                    <Table aria-label='customized table'>
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell align='left'>
-                                    Name
-                                </StyledTableCell>
-                                <StyledTableCell align='left'></StyledTableCell>
-                                <StyledTableCell align='right'>
-                                    Date
-                                </StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {events &&
-                                events.map((e: any) => (
-                                    <StyledTableRow key={e.id}>
+            {currentUser?.is_admin && (
+                <>
+                    <h1>Upcoming Events:</h1>
+                    <Button
+                        color='success'
+                        variant='contained'
+                        href='/admin/events'>
+                        Edit
+                    </Button>
+                    <div>
+                        <TableContainer
+                            sx={{
+                                width: '50%',
+                                margin: '30px auto',
+                            }}
+                            component={Paper}>
+                            <Table aria-label='customized table'>
+                                <TableHead>
+                                    <TableRow>
                                         <StyledTableCell align='left'>
-                                            {e.name}
+                                            Name
                                         </StyledTableCell>
-                                        <StyledTableCell align='left'>
-                                            <Avatar
-                                                // alt='Remy Sharp'
-                                                src={e.singer_photo}
-                                                sx={{
-                                                    width: 45,
-                                                    height: 45,
-                                                }}
-                                            />
-                                        </StyledTableCell>
+                                        <StyledTableCell align='left'></StyledTableCell>
                                         <StyledTableCell align='right'>
-                                            {moment(e.date).format(
-                                                'dddd Do, MMMM, yyyy'
-                                            )}
+                                            Date
                                         </StyledTableCell>
-                                    </StyledTableRow>
-                                ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </div>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {events &&
+                                        events.map((e: any) => (
+                                            <StyledTableRow key={e.id}>
+                                                <StyledTableCell align='left'>
+                                                    {e.name}
+                                                </StyledTableCell>
+                                                <StyledTableCell align='left'>
+                                                    <Avatar
+                                                        // alt='Remy Sharp'
+                                                        src={e.singer_photo}
+                                                        sx={{
+                                                            width: 45,
+                                                            height: 45,
+                                                        }}
+                                                    />
+                                                </StyledTableCell>
+                                                <StyledTableCell align='right'>
+                                                    {moment(e.date).format(
+                                                        'dddd Do, MMMM, yyyy'
+                                                    )}
+                                                </StyledTableCell>
+                                            </StyledTableRow>
+                                        ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </div>
+                </>
+            )}
         </>
     );
 }
