@@ -80,22 +80,3 @@ VALUES
         'Jim Whau',
         'Guitar'
     );
-
-{
-/*-- 
- POST / api / users (signup / login) GET / api / artists ? instrument = Trumpet GET / api / artists ? is_lead = true POST / api / artists (admin only) { name: 'Test Event',
- email: 'joe@example.com',
- is_lead: true,
- instrument: null,
- preferred_artists: [1, 4, 6, 9],
- } POST / api / events (client / admin only) { name: 'Test Event',
- date: '2022-08-14 17:00:00',
- lead_artist_id: 1,
- band_size: 4,
- } users id SERIAL NOT NULL username VARCHAR(128) NOT NULL UNIQUE password VARCHAR(64) NOT NULL is_admin BOOLEAN NOT NULL default false;
- 
- events id SERIAL NOT NULL name TEXT NOT NULL date TIMESTAMPTZ NOT NULL;
- 
- lead_artist_id FOREIGN KEY (artists, id) NOT NULL band_size SMALLINT NOT_NULL artists id SERIAL NOT NULL email TEXT NOT NULL UNIQUE name TEXT NOT NULL is_lead BOOLEAN DEFAULT FALSE instrument VARCHAR(40);
- 
- artist_preferred_musicians lead_artist_id FOREIGN KEY (artists, id) NOT NULL preferred_artist_id FOREIGN KEY (artists, id) NOT NULL event_artists event_id FOREIGN KEY (events, id) NOT NULL artist_id FOREIGN KEY (artists, id) NOT NULL status VARCHAR(10)
