@@ -1,8 +1,8 @@
 {
     "scripts": {
-        "dev": "NODE_ENV=development nodemon --exec 'ts-node' server.ts",
-        "start": "NODE_ENV=production ts-node --transpile-only server.ts",
-        "start:local": "NODE_ENV=production ts-node -r dotenv/config --transpile-only server.ts",
+        "dev": "nodemon --exec 'ts-node' server.ts",
+        "start": "ts-node --transpile-only server.ts",
+        "start:local": "ts-node -r dotenv/config --transpile-only server.ts",
         "test": "jest"
     },
     "dependencies": {
