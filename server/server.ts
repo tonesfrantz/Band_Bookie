@@ -1,6 +1,6 @@
 // if (process.env.NODE_ENV !== 'production') {
-require('dotenv').config();
-// }
+    require('dotenv').config();
+}
 
 import express, { Request, Response } from 'express';
 import path from 'path';
@@ -42,15 +42,7 @@ app.get('/api/test', (req: Request<any, any, any, any>, res: Response<any>) => {
     res.json({ date: new Date().toString() });
 });
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
-    app.get('/*', (req, res) => {
-        res.sendFile(
-            path.join(__dirname, '..', 'client', 'build', 'index.html')
-        );
-    });
-}
 
 // Other pre-request middleware
 // app.use(logger);
@@ -64,6 +56,15 @@ app.use('/api/users', usersController);
 app.use('/api/singers', singerController);
 // app.use('/api/contact', contactController);
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+
+    app.get('/*', (req, res) => {
+        res.sendFile(
+            path.join(__dirname, '..', 'client', 'build', 'index.html')
+        );
+    });
+}
 // Post-request middleware
 // app.use(errorHandler);
 
