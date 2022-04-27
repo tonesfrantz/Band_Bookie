@@ -10,14 +10,44 @@ Available on Heroku [here](https://hidden-chamber-28437.herokuapp.com)
 
 # The project:
 
--- Create a website where clients can book a band simply. The band agents can quickly and easily make the line up through a tree system of booking.
+-- Create a website where clients can book a band simply. The band agents can quickly and easily make the 'line up' through a tree system of booking.
 
--- The client books their preferred singer and band size/instrumentation. The singer has their list of preferred musicians in order of prefereance and then
-the system outputs singer and band members.
+-- The client books their preferred singer and band size/instrumentation, this automatically produces an event with Band size and singer involved. Every event may be edited.
 
 -- This process takes all the time consuming effort out of booking a band.
 
+# Challanges.
+
+-- Keeping 'scope creep' of the project at bay and prioritizing features.
+
+-- Working with MUI, although a very useful often was difficult to implement early on. Over time this became easier.
+
+-- Deploying to Heroku the application failed to build and required 4 or 5 attempts at debugging to bring into production.
+
+-- Database 'JOIN' was met with issues in defining ID and table content.
+
+
 # Deliverables of the project:
+
+-- An application where a user can browse different singers/artist and choose thir band size.
+
+-- A form to enter details into for the client to register their events.
+
+-- Admin features which offer the ability to edit events, users, and artists.
+
+# How to use:
+
+-- Create an event as a 'client' and fill in the Create Event form.
+
+-- Access the Admin side by signing in as an administrative user and follow the navigation to edit the data of the site.
+
+# Future Updates:
+
+-- The singer has their list of preferred musicians in order of prefereance and then the system outputs singer and band members through automated emails.
+
+-- A song list is added where clients can choose their set lists from the menu available.
+
+-- Short recorded clips of individual singers.
 
 # Planning:
 
@@ -27,51 +57,3 @@ https://github.com/tonesfrantz/Band_Bookie/blob/main/BandBookiewireframing.png
 --Wireframe of Database:
 /Users/anthonyfrantz/sei/project4/Band_Bookie/dataBaseWireframe.png
 
--- DATABASE Planning:
-
-POST /api/users (signup / login)
-GET /api/artists?instrument=Trumpet
-GET /api/artists?is_lead=true
-POST /api/artists (admin only)
-{
-name: 'Test Event',
-email: 'joe@example.com',
-is_lead: true,
-instrument: null,
-preferred_artists: [1, 4, 6, 9],
-}
-POST /api/events (client/admin only)
-{
-name: 'Test Event',
-date: '2022-08-14 17:00:00',
-lead_artist_id: 1,
-band_size: 4,
-}
-users
-id SERIAL NOT NULL
-username VARCHAR(128) NOT NULL UNIQUE
-password VARCHAR(64) NOT NULL
-is_admin BOOLEAN NOT NULL default false
-
-events
-id SERIAL NOT NULL
-name TEXT NOT NULL
-date TIMESTAMPTZ NOT NULL
-lead_artist_id FOREIGN KEY (artists, id) NOT NULL
-band_size SMALLINT NOT_NULL
-
-artists
-id SERIAL NOT NULL
-email TEXT NOT NULL UNIQUE
-name TEXT NOT NULL
-is_lead BOOLEAN DEFAULT FALSE
-instrument VARCHAR(40)
-
-artist_preferred_musicians
-lead_artist_id FOREIGN KEY (artists, id) NOT NULL
-preferred_artist_id FOREIGN KEY (artists, id) NOT NULL
-
-event_artists
-event_id FOREIGN KEY (events, id) NOT NULL
-artist_id FOREIGN KEY (artists, id) NOT NULL
-status VARCHAR(10)
