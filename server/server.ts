@@ -1,4 +1,4 @@
-// if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
@@ -42,8 +42,6 @@ app.get('/api/test', (req: Request<any, any, any, any>, res: Response<any>) => {
     res.json({ date: new Date().toString() });
 });
 
-
-
 // Other pre-request middleware
 // app.use(logger);
 app.use(express.json()); // support json encoded bodies
@@ -55,7 +53,6 @@ app.use('/api/sessions', sessionsController);
 app.use('/api/users', usersController);
 app.use('/api/singers', singerController);
 // app.use('/api/contact', contactController);
-
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
