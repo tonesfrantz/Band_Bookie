@@ -1,7 +1,7 @@
 {
     "scripts": {
         "dev": "nodemon --exec 'ts-node' server.ts",
-        "start": "ts-node --transpile-only server.ts",
+        "start": "./node_modules/.bin/ts-node --transpile-only server.ts",
         "start:local": "ts-node -r dotenv/config --transpile-only server.ts",
         "test": "jest"
     },
