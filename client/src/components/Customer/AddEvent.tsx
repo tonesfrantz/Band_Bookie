@@ -84,6 +84,7 @@ export function AddEvent() {
                     width: '90%',
                     margin: '30px',
                     padding: '20px',
+                    border: '2px solid black',
                 }}
                 component={Paper}>
                 <DatePicker

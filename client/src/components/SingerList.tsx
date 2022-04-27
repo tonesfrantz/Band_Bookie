@@ -48,7 +48,11 @@ export function SingerList() {
             <div className='customerPage'>
                 <Box sx={{ minWidth: 120 }}>
                     <TableContainer
-                        sx={{ width: '90%', margin: '30px' }}
+                        sx={{
+                            width: '90%',
+                            margin: '30px',
+                            border: '2px solid black',
+                        }}
                         component={Paper}>
                         <Table
                             sx={{ minWidth: 500 }}

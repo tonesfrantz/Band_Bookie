@@ -91,6 +91,7 @@ export function LoginPage() {
                     margin: '30px',
                     padding: '20px',
                     height: '40%',
+                    border: '2px solid black',
                 }}
                 component={Paper}>
                 <TextField

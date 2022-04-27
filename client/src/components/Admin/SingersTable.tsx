@@ -66,10 +66,15 @@ export function SingersTable() {
                     <Button variant='outlined'>
                         <Link to='/admin/events'>Back to Events</Link>
                     </Button>
-                    <TableContainer component={Paper}>
-                        <Table
-                            sx={{ minWidth: 500 }}
-                            aria-label='customized table'>
+                    <TableContainer
+                        sx={{
+                            minWidth: 500,
+                            border: '2px solid black',
+                            width: '90%',
+                            margin: '30px',
+                        }}
+                        component={Paper}>
+                        <Table>
                             <TableHead>
                                 <TableRow>
                                     <StyledTableCell>ID</StyledTableCell>

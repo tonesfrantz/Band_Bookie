@@ -65,10 +65,15 @@ export function UsersTable() {
                     <Button variant='outlined'>
                         <Link to='/admin/singers'>Back to Singers</Link>
                     </Button>
-                    <TableContainer component={Paper}>
-                        <Table
-                            sx={{ minWidth: 500 }}
-                            aria-label='customized table'>
+                    <TableContainer
+                        sx={{
+                            minWidth: 500,
+                            border: '2px solid black',
+                            width: '90%',
+                            margin: '30px',
+                        }}
+                        component={Paper}>
+                        <Table aria-label='customized table'>
                             <TableHead>
                                 <TableRow>
                                     <StyledTableCell>ID</StyledTableCell>
